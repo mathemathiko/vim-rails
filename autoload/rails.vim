@@ -2400,7 +2400,7 @@ call s:add_methods('app', ['commands'])
 
 function! s:addfilecmds(type)
   let l = s:sub(a:type,'^.','\l&')
-  for prefix in ['E', 'S', 'V', 'T', 'D', 'R', 'RE', 'RS', 'RV', 'RT', 'RD']
+  for prefix in ['S', 'V', 'T', 'D', 'R', 'RE', 'RS', 'RV', 'RT', 'RD']
     let cplt = " -complete=customlist,".s:sid.l."List"
     exe "command! -buffer -bar ".(prefix =~# 'D' ? '-range=0 ' : '')."-nargs=*".cplt." ".prefix.l." :execute s:".l.'Edit("'.(prefix =~# 'D' ? '<line1>' : '').s:sub(prefix, '^R', '').'<bang>",<f-args>)'
   endfor
@@ -2559,7 +2559,7 @@ function! s:Navcommand(bang,...)
   let affinity = ''
   for arg in a:000
     if arg =~# '^[a-z]\+$'
-      for prefix in ['E', 'S', 'V', 'T', 'D', 'R', 'RE', 'RS', 'RV', 'RT', 'RD']
+      for prefix in ['S', 'V', 'T', 'D', 'R', 'RE', 'RS', 'RV', 'RT', 'RD']
         exe 'command! -buffer -bar -bang -nargs=* ' .
               \ (prefix =~# 'D' ? '-range=0 ' : '') .
               \ prefix . arg . ' :echoerr ' .
@@ -2578,7 +2578,7 @@ function! s:define_navcommand(name, projection, ...) abort
   if name !~# '^[a-z]\+$'
     return s:error("E182: Invalid command name ".name)
   endif
-  for prefix in ['E', 'S', 'V', 'T', 'D', 'R', 'RE', 'RS', 'RV', 'RT', 'RD']
+  for prefix in ['S', 'V', 'T', 'D', 'R', 'RE', 'RS', 'RV', 'RT', 'RD']
     exe 'command! -buffer -bar -bang -nargs=* ' .
           \ (prefix =~# 'D' ? '-range=0 ' : '') .
           \ '-complete=customlist,'.s:sid.'CommandList ' .
